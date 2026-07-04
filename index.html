@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouthHustle | Global Profile Booster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            line-height: 1.5;
+        }
+
+        header {
+            background: #0f172a;
+            border-bottom: 2px solid #6366f1;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+        }
+
+        .logo span {
+            color: #a855f7;
+        }
+
+        .hero {
+            background: radial-gradient(circle at top left, #1e1b4b 0%, #311042 40%, #0b0f19 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .main-container {
+            max-width: 1600px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 2.5rem;
+        }
+
+        .sidebar {
+            background: #111827;
+            padding: 1.75rem;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+            height: fit-content;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.3rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #374151;
+            font-weight: 800;
+        }
+
+        .filter-group {
+            margin-bottom: 1.75rem;
+        }
+
+        .filter-group h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .filter-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: 1px solid transparent;
+            padding: 0.7rem 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            margin-bottom: 0.3rem;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: #1f2937;
+            color: #ffffff;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+            color: #ffffff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .opportunities-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #6366f1;
+            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.15);
+        }
+
+        .card-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1.25rem;
+        }
+
+        .tag {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .tag.category { background: #1e3a8a; color: #60a5fa; border: 1px solid #2563eb; }
+        .tag.subject { background: #3b0764; color: #c084fc; border: 1px solid #7c3aed; }
+        .tag.grade { background: #7c2d12; color: #fb923c; border: 1px solid #ea580c; }
+
+        .card h3 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .organization {
+            font-size: 1.05rem;
+            color: #38bdf8;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #cbd5e1;
+            margin-bottom: 1rem;
+        }
+
+        .card-details-panel {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.85rem;
+        }
+
+        .detail-item {
+            margin-bottom: 0.9rem;
+        }
+
+        .detail-label {
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            display: block;
+            margin-bottom: 3px;
+            letter-spacing: 0.06em;
+        }
+
+        .detail-value {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .apply-btn {
+            background: linear-gradient(90deg, #6366f1 0%, #a855f7 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.85rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 14px rgba(108, 99, 255, 0.2);
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            background: #111827;
+            border-radius: 16px;
+            border: 1px solid #1e293b;
+        }
+
+        @media (max-width: 1250px) {
+            .card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">YouthHustle<span>.</span></div>
+    </header>
+
+    <section class="hero">
+        <h1>Global Extracurricular Launchpad</h1>
+        <p>A high-vibrancy database mapping international competitions, prestigious research setups, and target milestones open to candidates worldwide.</p>
+    </section>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <h3>Custom Dashboard</h3>
+            
+            <div class="filter-group">
+                <h4>Program Tracker</h4>
+                <button class="filter-btn active" data-filter="category" data-value="all">All Types</button>
+                <button class="filter-btn" data-filter="category" data-value="competition">Competitions</button>
+                <button class="filter-btn" data-filter="category" data-value="internship">Internships</button>
+                <button class="filter-btn" data-filter="category" data-value="research">Research</button>
+            </div>
+
+            <div class="filter-group">
+                <h4>Core Fields</h4>
+                <button class="filter-btn active" data-filter="subject" data-value="all">All Subjects</button>
+                <button class="filter-btn" data-filter="subject" data-value="stem">STEM / Coding</button>
+                <button class="filter-btn" data-filter="subject" data-value="medical">Pre-Med / Bio</button>
+                <button class="filter-btn" data-filter="subject" data-value="humanities">Humanities / Arts</button>
+                <button class="filter-btn" data-filter="subject" data-value="business">Business / Econ</button>
+                <button class="filter-btn" data-filter="subject" data-value="law">Law / Politics</button>
+            </div>
+
+            <div class="filter-group">
+                <h4>Age Categories</h4>
+                <button class="filter-btn active" data-filter="grade" data-value="all">All Grades</button>
+                <button class="filter-btn" data-filter="grade" data-value="underclass">Freshmen & Sophomores</button>
+                <button class="filter-btn" data-filter="grade" data-value="upperclass">Juniors & Seniors</button>
+            </div>
+
+            <div class="filter-group">
+                <h4>App Fee Rules</h4>
+                <button class="filter-btn active" data-filter="appFee" data-value="all">All App Fees</button>
+                <button class="filter-btn" data-filter="appFee" data-value="none">No Fee ($0)</button>
+                <button class="filter-btn" data-filter="appFee" data-value="required">Fee Required</button>
+            </div>
+
+            <div class="filter-group">
+                <h4>Closing Season</h4>
+                <button class="filter-btn active" data-filter="deadlineSeason" data-value="all">All Windows</button>
+                <button class="filter-btn" data-filter="deadlineSeason" data-value="spring">Spring Window</button>
+                <button class="filter-btn" data-filter="deadlineSeason" data-value="summer">Summer Window</button>
+                <button class="filter-btn" data-filter="deadlineSeason" data-value="winter">Winter Window</button>
+            </div>
+        </aside>
+
+        <main class="opportunities-list" id="opportunitiesContainer">
+        </main>
+    </div>
+
+    <script>
+        const opportunities = [
+            {
+                title: "John Locke Global Essay Competition",
+                org: "John Locke Institute",
+                category: "competition",
+                subject: "humanities",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "A highly prestigious global essay tournament testing high school students across philosophy, politics, history, psychology, and economics modules.",
+                deadline: "June 30, 2026",
+                appFeeDetail: "Free ($0 to enter before standard deadline)",
+                eligibility: "Students under 19 years old worldwide",
+                location: "Global Virtual Entry / Oxford Ceremony",
+                url: "https://www.johnlockeinstitute.com"
+            },
+            {
+                title: "The Conrad Challenge",
+                org: "Conrad Foundation",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "required",
+                deadlineSeason: "winter",
+                desc: "An international entrepreneurial innovation challenge tasks teams to design sustainable scalable technology frameworks to address real-world problems.",
+                deadline: "November 21, 2026",
+                appFeeDetail: "$499 per team registration fee",
+                eligibility: "Ages 13 to 18 (Global Teams of 2 to 5)",
+                location: "Online Submissions / NASA Finals Gala",
+                url: "https://www.conradchallenge.org"
+            },
+            {
+                title: "The Diamond Challenge",
+                org: "Horn Entrepreneurship at University of Delaware",
+                category: "competition",
+                subject: "business",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "The world's premier high school entrepreneurship showcase. Students build actionable pitches across social impact or business venture formats.",
+                deadline: "January 8, 2027",
+                appFeeDetail: "Free ($0 to participate)",
+                eligibility: "Grades 9-12 enrolled globally",
+                location: "Virtual Preliminary / Global Summit In-Person",
+                url: "https://diamondchallenge.org"
+            },
+            {
+                title: "International Brain Bee Championship",
+                org: "International Brain Bee Organization",
+                category: "competition",
+                subject: "medical",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "A premier worldwide neuroscience competition tracking neuroanatomy, neurological diagnostics, and laboratory brain behavior configurations.",
+                deadline: "Varies by country tracking schedule",
+                appFeeDetail: "Free ($0 regional entry parameters)",
+                eligibility: "Ages 14 to 18 (International Chapters)",
+                location: "Local Chapters / Global Virtual Finale",
+                url: "https://www.internationalbrainbee.org"
+            },
+            {
+                title: "Harvard Crimson Global Essay Competition",
+                org: "The Harvard Crimson",
+                category: "competition",
+                subject: "humanities",
+                grade: "underclass",
+                appFee: "required",
+                deadlineSeason: "winter",
+                desc: "An elite creative and journalistic editorial match judged directly by active staff editors from Harvard University's newspaper platform.",
+                deadline: "January 28, 2027",
+                appFeeDetail: "$15 Application Processing Fee",
+                eligibility: "Ages 13 to 18 years old globally",
+                location: "100% Online Global Portal",
+                url: "https://www.crimsonglobalessaycomp.com"
+            },
+            {
+                title: "Wharton Global Youth Investment Competition",
+                org: "The Wharton School (UPenn)",
+                category: "competition",
+                subject: "business",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "Manage simulated client financial portfolios alongside global peers using commercial stock platforms, finishing with an official case summary presentation.",
+                deadline: "September 18, 2026",
+                appFeeDetail: "Free ($0 registration format)",
+                eligibility: "Grades 9-12 (Teams of 4 to 7 members)",
+                location: "Hybrid (Online Trades / Finalist Gala)",
+                url: "https://globalyouth.wharton.upenn.edu"
+            },
+            {
+                title: "New York Academy of Sciences Junior Academy",
+                org: "NYAS Network",
+                category: "research",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "An international incubator matching ambitious students with professional STEM mentors to solve grand engineering challenges over structured bootcamps.",
+                deadline: "August 15, 2026",
+                appFeeDetail: "Free ($0 application fee)",
+                eligibility: "Ages 13 to 17 globally",
+                location: "100% Virtual Collaborative Workspace",
+                url: "https://www.nyas.org"
+            },
+            {
+                title: "Geneva Global Health Case Competition",
+                org: "Geneva International Networks",
+                category: "competition",
+                subject: "medical",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "Formulate international policy frameworks addressing epidemiology, clean water metrics, and containment strategies under global healthcare guidelines.",
+                deadline: "April 5, 2027",
+                appFeeDetail: "Free ($0 registration portal)",
+                eligibility: "Grades 10-12 globally",
+                location: "Virtual Submissions System",
+                url: "https://www.unige.ch"
+            },
+            {
+                title: "World Individual Debating Championship",
+                org: "WIDPSC Secretariat",
+                category: "competition",
+                subject: "law",
+                grade: "upperclass",
+                appFee: "required",
+                deadlineSeason: "winter",
+                desc: "The elite tournament for independent global high school speakers covering persuasive speaking, debate, and impromptu commentary tracks.",
+                deadline: "December 10, 2026",
+                appFeeDetail: "$120 Registration processing fee",
+                eligibility: "High school enrollment globally",
+                location: "Rotates Annually / Global Venues",
+                url: "https://www.widpsc.com"
+            },
+            {
+                title: "Google Summer of Code Project Tracks",
+                org: "Google Open Source",
+                category: "internship",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "A highly competitive remote software assembly framework matching code enthusiasts with global core development teams.",
+                deadline: "April 2, 2027",
+                appFeeDetail: "Free ($0 application processing)",
+                eligibility: "Advanced senior tier students internationally",
+                location: "100% Distributed Global Code Repos",
+                url: "https://summerofcode.withgoogle.com"
+            },
+            {
+                title: "Milken Institute Global Essay Index",
+                org: "The Milken Foundation",
+                category: "competition",
+                subject: "business",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "Write macroeconomic position whitepapers tackling banking democratization, microfinance initiatives, and international fiscal recovery indices.",
+                deadline: "March 15, 2027",
+                appFeeDetail: "Free ($0 upload fee)",
+                eligibility: "Grades 9-12 globally",
+                location: "Online Upload Portal System",
+                url: "https://www.milkeninstitute.org"
+            },
+            {
+                title: "Lumiere Research Scholar Program",
+                org: "Lumiere Education Network",
+                category: "research",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "required",
+                deadlineSeason: "spring",
+                desc: "Work 1-on-1 with a PhD mentor from an elite university to write a full-length, independent research paper in any field of study.",
+                deadline: "May 16, 2026",
+                appFeeDetail: "$35 Processing Fee",
+                eligibility: "All high school students globally",
+                location: "100% Online Cohorts",
+                url: "https://www.lumiere-education.com"
+            },
+            {
+                title: "Regeneron Science Talent Search",
+                org: "Society for Science",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "The oldest and most prestigious science competition in the US, accepting independent research from advanced high school seniors worldwide.",
+                deadline: "November 12, 2026",
+                appFeeDetail: "Free ($0 to submit)",
+                eligibility: "High school seniors with specific international status",
+                location: "Online Portal / Washington D.C. Gala",
+                url: "https://www.societyforscience.org"
+            },
+            {
+                title: "Polygence Research Fellowship",
+                org: "Polygence Academy",
+                category: "research",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "A completely personalized research incubator matching students with academic mentors to create unique creative or scientific capstone outcomes.",
+                deadline: "Rolling Admissions Basis",
+                appFeeDetail: "Free ($0 setup application)",
+                eligibility: "Grades 9-12 internationally",
+                location: "100% Remote Architecture",
+                url: "https://www.polygence.org"
+            },
+            {
+                title: "Microsoft Imagine Cup Junior",
+                org: "Microsoft Corporation",
+                category: "competition",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "Students learn about Artificial Intelligence (AI) and apply it to develop concepts to change the world for good alongside global peers.",
+                deadline: "May 8, 2026",
+                appFeeDetail: "Free ($0 system entry)",
+                eligibility: "Ages 13 to 18 internationally",
+                location: "Virtual Global Submissions",
+                url: "https://imaginecup.microsoft.com"
+            },
+            {
+                title: "Immerse Education Essay Competition",
+                org: "Immerse Education Oxford",
+                category: "competition",
+                subject: "humanities",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "An essay competition designed to encourage academic writing across varied fields, granting full or partial summer program scholarships.",
+                deadline: "August 31, 2026",
+                appFeeDetail: "Free ($0 to submit essay details)",
+                eligibility: "Ages 13 to 18 years old globally",
+                location: "Online Upload / Cambridge Ceremony",
+                url: "https://www.immerse.education"
+            },
+            {
+                title: "Clean Tech Competition",
+                org: "Center for Science Teaching and Learning",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "An international research and design contest focusing on environmental sustainability and green energy technology architecture designs.",
+                deadline: "April 18, 2027",
+                appFeeDetail: "Free ($0 submission tracking)",
+                eligibility: "Ages 15 to 18 (Global Teams)",
+                location: "Virtual Presentation Finals",
+                url: "https://www.cleantechcompetition.org"
+            },
+            {
+                title: "Davidson Fellows Scholarship",
+                org: "Davidson Institute",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "Offers elite scholarship funding to extraordinary young individuals who have completed significant, graduate-level work in a core field.",
+                deadline: "February 10, 2027",
+                appFeeDetail: "Free ($0 to upload portfolio)",
+                eligibility: "Ages 18 or under worldwide with specific criteria",
+                location: "Online Application Submissions",
+                url: "https://www.davidsongifted.org"
+            },
+            {
+                title: "Genius Olympiad",
+                org: "Terra Science and Education",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "required",
+                deadlineSeason: "spring",
+                desc: "An international high school project competition focused on environmental issues, hosting tracks across science, writing, and robotics.",
+                deadline: "March 5, 2027",
+                appFeeDetail: "$50 Application Processing Fee",
+                eligibility: "Grades 9-12 enrolled anywhere",
+                location: "Rochester Institute of Technology / Hybrid",
+                url: "https://www.geniusolympiad.org"
+            },
+            {
+                title: "World Historian Essay Contest",
+                org: "World History Association",
+                category: "competition",
+                subject: "humanities",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "An international essay contest highlighting the value of world history perspectives over generic textbook narratives.",
+                deadline: "May 1, 2026",
+                appFeeDetail: "Free ($0 submission requirement)",
+                eligibility: "All K-12 students enrolled globally",
+                location: "Email Submissions System",
+                url: "https://www.thewha.org"
+            },
+            {
+                title: "Bow Seat Ocean Awareness Contest",
+                org: "Bow Seat Programs",
+                category: "competition",
+                subject: "humanities",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "An international platform advocating for ocean protection through creative writing, visual arts, and digital media project profiles.",
+                deadline: "June 15, 2026",
+                appFeeDetail: "Free ($0 submission parameters)",
+                eligibility: "Ages 11 to 18 globally",
+                location: "100% Digital Art Submissions",
+                url: "https://bowseat.org"
+            },
+            {
+                title: "Technovation Girls Global Challenge",
+                org: "Technovation Worldwide",
+                category: "competition",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "Empowers young women to code and launch mobile applications addressing complex local issues under a startup incubator architecture.",
+                deadline: "March 24, 2027",
+                appFeeDetail: "Free ($0 registration structure)",
+                eligibility: "Ages 10 to 18 identifying as female/non-binary",
+                location: "Global Chapters / Remote Submissions",
+                url: "https://www.technovation.org"
+            },
+            {
+                title: "Cisco NetAcad Innovation Challenge",
+                org: "Cisco Systems Network",
+                category: "competition",
+                subject: "stem",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "A team hackathon modeling edge computing configurations, internet-of-things arrays, and unified networking automation schemes.",
+                deadline: "December 5, 2026",
+                appFeeDetail: "Free ($0 submission framework)",
+                eligibility: "Ages 16-18 global team tracks",
+                location: "Distributed Network Platforms",
+                url: "https://www.netacad.com"
+            },
+            {
+                title: "The Marshall Society Essay Competition",
+                org: "Cambridge University Economics Society",
+                category: "competition",
+                subject: "business",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "Highly respected international writing platform focusing on analytical economic solutions to modern commercial dilemmas.",
+                deadline: "August 10, 2026",
+                appFeeDetail: "Free ($0 tracking execution)",
+                eligibility: "Pre-university students globally",
+                location: "Digital Upload System",
+                url: "https://marshallsociety.com"
+            },
+            {
+                title: "StGallen Wings of Excellence Award",
+                org: "St. Gallen Foundation",
+                category: "competition",
+                subject: "business",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "Global essay competition tracking systemic financial resilience and business scalability modules under elite criteria guidelines.",
+                deadline: "February 1, 2027",
+                appFeeDetail: "Free ($0 processing setup)",
+                eligibility: "Advanced senior tier students internationally",
+                location: "Global Submission / Switzerland Event",
+                url: "https://symposium.org"
+            },
+            {
+                title: "Atlas Shrugged Essay Tournament",
+                org: "Ayn Rand Institute",
+                category: "competition",
+                subject: "humanities",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "An international essay contest challenging upper-level students to analyze the complex philosophical and economic themes of Ayn Rand's major novel.",
+                deadline: "November 6, 2026",
+                appFeeDetail: "Free ($0 to submit entry)",
+                eligibility: "High school seniors and college students globally",
+                location: "Online Portal Submissions",
+                url: "https://www.aynrand.org"
+            },
+            {
+                title: "MIT THINK Scholars Program",
+                org: "Massachusetts Institute of Technology",
+                category: "research",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "An initiative promoting student-led research where teams submit a comprehensive proposal and receive seed funding and mentorship from MIT students.",
+                deadline: "January 15, 2027",
+                appFeeDetail: "Free ($0 application portal)",
+                eligibility: "High school students living in the US or international students under specific criteria",
+                location: "Remote Mentorship / Boston Campus Visit",
+                url: "https://think.mit.edu"
+            },
+            {
+                title: "SHe Can STEM Internship Simulation",
+                org: "Girl Up Foundation",
+                category: "internship",
+                subject: "stem",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "summer",
+                desc: "A virtual workplace simulation offering skill-building modules, professional panels, and data-analysis projects matching early high schoolers with tech mentors.",
+                deadline: "July 20, 2026",
+                appFeeDetail: "Free ($0 processing)",
+                eligibility: "Ages 13 to 17 identifying as female or non-binary worldwide",
+                location: "100% Virtual Distributed Workspace",
+                url: "https://www.girlup.org"
+            },
+            {
+                title: "International Environmental Law Case Challenge",
+                org: "Center for Global Legal Studies",
+                category: "competition",
+                subject: "law",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "A mock-court style dispute simulation where teams draft comprehensive legal briefs tackling maritime pollution and climate migration frameworks.",
+                deadline: "April 12, 2027",
+                appFeeDetail: "Free ($0 baseline entry)",
+                eligibility: "Grades 11-12 or international equivalents",
+                location: "Distributed Video Panels / Online System",
+                url: "https://www.cgls.org"
+            },
+            {
+                title: "Biomedical Engineering Independent Tracks",
+                org: "Johns Hopkins University CCBI",
+                category: "research",
+                subject: "medical",
+                grade: "upperclass",
+                appFee: "required",
+                deadlineSeason: "winter",
+                desc: "An intensive remote research group focused on creating computational models of cellular biomechanics and medical device mock-ups.",
+                deadline: "February 5, 2027",
+                appFeeDetail: "$50 Assessment Fee",
+                eligibility: "Grades 11-12 with advanced biology prerequisites",
+                location: "Hybrid Remote / Sent Laboratory Kit Array",
+                url: "https://bme.jhu.edu"
+            },
+            {
+                title: "High School Fed Challenge",
+                org: "Federal Reserve System",
+                category: "competition",
+                subject: "business",
+                grade: "upperclass",
+                appFee: "none",
+                deadlineSeason: "winter",
+                desc: "Teams act as central bankers by analyzing macroeconomic data and delivering a structured presentation recommending economic policy actions.",
+                deadline: "February 15, 2027",
+                appFeeDetail: "Free ($0 alignment fee)",
+                eligibility: "Grades 9-12 enrolled teams",
+                location: "Virtual Submissions / National Broadcast Finale",
+                url: "https://www.federalreserve.gov"
+            },
+            {
+                title: "The Concord Review Research Seminar",
+                org: "The Concord Review Organization",
+                category: "research",
+                subject: "humanities",
+                grade: "upperclass",
+                appFee: "required",
+                deadlineSeason: "spring",
+                desc: "An academic program coaching serious history students through the complex process of writing an 8,000-word, journal-ready research paper.",
+                deadline: "Rolling Quarterly Admission Windows",
+                appFeeDetail: "$40 Submission Review Fee",
+                eligibility: "Secondary school students globally",
+                location: "Online Digital Classrooms",
+                url: "https://www.tcr.org"
+            },
+            {
+                title: "World Affairs Council Youth Summit",
+                org: "World Affairs Councils of America",
+                category: "internship",
+                subject: "law",
+                grade: "underclass",
+                appFee: "none",
+                deadlineSeason: "spring",
+                desc: "A combination of a diplomatic simulation and micro-internship placement focused on analyzing sustainable development goals and international treaties.",
+                deadline: "May 5, 2026",
+                appFeeDetail: "Free ($0 entry portal)",
+                eligibility: "Ages 14 to 18 internationally",
+                location: "Hybrid Remote / Regional Council Nodes",
+                url: "https://www.worldaffairscouncils.org"
+            }
+        ];
+
+        const container = document.getElementById('opportunitiesContainer');
+        const filters = {
+            category: 'all',
+            subject: 'all',
+            grade: 'all',
+            appFee: 'all',
+            deadlineSeason: 'all'
+        };
+
+        function renderCards() {
+            container.innerHTML = '';
+            
+            const filteredData = opportunities.filter(item => {
+                return (filters.category === 'all' || item.category === filters.category) &&
+                       (filters.subject === 'all' || item.subject === filters.subject) &&
+                       (filters.grade === 'all' || item.grade === filters.grade) &&
+                       (filters.appFee === 'all' || item.appFee === filters.appFee) &&
+                       (filters.deadlineSeason === 'all' || item.deadlineSeason === filters.deadlineSeason);
+            });
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<div class="no-results">No opportunities found matching your current dashboard parameters. Adjust filters to broaden your search matrix.</div>`;
+                return;
+            }
+
+            filteredData.forEach(op => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-left">
+                        <div>
+                            <div class="tags">
+                                <span class="tag category">${op.category}</span>
+                                <span class="tag subject">${op.subject}</span>
+                                <span class="tag grade">${op.grade === 'underclass' ? 'Grades 9-10' : 'Grades 11-12'}</span>
+                            </div>
+                            <h3>${op.title}</h3>
+                            <div class="organization">via ${op.org}</div>
+                            <p class="description">${op.desc}</p>
+                        </div>
+                    </div>
+                    <div class="card-details-panel">
+                        <div>
+                            <div class="detail-item">
+                                <span class="detail-label">Application Deadline</span>
+                                <span class="detail-value">${op.deadline}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">App Processing Fee</span>
+                                <span class="detail-value">${op.appFeeDetail}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Target Group</span>
+                                <span class="detail-value">${op.eligibility}</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Operating Location</span>
+                                <span class="detail-value">${op.location}</span>
+                            </div>
+                        </div>
+                        <a href="${op.url}" target="_blank" class="apply-btn">Visit Official Portal</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const group = e.target.getAttribute('data-filter');
+                const val = e.target.getAttribute('data-value');
+                
+                document.querySelectorAll(`.filter-btn[data-filter="${group}"]`).forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                filters[group] = val;
+                renderCards();
+            });
+        });
+
+        renderCards();
+    </script>
+</body>
+</html>
